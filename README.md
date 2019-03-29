@@ -32,7 +32,7 @@ mascara_telefone(null);
 setTimeout(carregar_script("<script bla bla bla><\/script>"), 1500);
 ```
 
-MASCARA DE TELEFONE: PADRÃO: p_inputtelefone
+TROCA O NÚMERO DE ACORDO COM O PARAMETRÔ (telefone=08001112222) DA URL
 ```
-mascara_telefone(null);
+acao_pelo_tel(_NUMERO_0800_ORGANICO_AQUI_);
 ```
