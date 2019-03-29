@@ -1,5 +1,5 @@
-// VERSÃO 1.0
-console.log("VERSÃO JS 1.0");
+// VERSÃO 1.1
+console.log("VERSÃO JS 1.1");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -191,7 +191,7 @@ function mascara_telefone(classe_campo){
 
 
 function carregar_script(snippet) {
-	$('body').append(snippet);
+	$('head').append(snippet);
 }
 
 function esconder_zopim(){
