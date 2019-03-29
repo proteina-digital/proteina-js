@@ -4,9 +4,10 @@ Este arquivo contém funções necessárias para uso em plataformas como Webflow
 
 ## Getting Started
 
-Adicione o arquivo mestre.min.js no bottom, após o jquery:
+Adicione os arquivos mask e mestre.min.js no bottom, após o jquery:
 
 ```
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <script type="text/javascript" src="https://rawcdn.githack.com/proteina-digital/proteina-js/master/mestre.min.js"></script>
 ```
 
