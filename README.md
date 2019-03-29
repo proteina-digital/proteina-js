@@ -7,7 +7,7 @@ Este arquivo contém funções necessárias para uso em plataformas como Webflow
 Adicione o arquivo mestre.min.js no bottom, após o jquery:
 
 ```
-<script type="text/javascript" src="https://gitcdn.xyz/cdn/proteina-digital/proteina-js/master/mestre.min.js"></script>
+<script type="text/javascript" src="https://rawcdn.githack.com/proteina-digital/proteina-js/2e8d4474557cdf016ffd845579ab8294315e3eca/mestre.min.js"></script>
 ```
 
 ### Prerequisites
