@@ -1,5 +1,5 @@
-// VERSÃO 1.1
-console.log("VERSÃO JS 1.1");
+// VERSÃO 2.0
+console.log("VERSÃO JS 2.0");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -169,6 +169,72 @@ function acao_pelo_tel(tel_atual){
 }
 
 
+function acao_pela_campanha(tel_atual, campanha_organica){
+	if ( readCookie('utm_campaign') ){
+
+		if( _GETURL("utm_campaign") ){
+
+			muda_tel( tel_atual, checa_campanha( _GETURL("utm_campaign") ) );
+		        
+	        _CRIAINPUT( "site", _GETURL("utm_campaign") );
+	        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
+	        _CRIAINPUT( "utm_medium", _GETURL("utm_medium") );
+	        _CRIAINPUT( "utm_campaign", _GETURL("utm_campaign")  );
+
+	        cria_cookie("site", _GETURL("utm_campaign") );
+	        cria_cookie("utm_campaign", _GETURL("utm_campaign"));
+	        cria_cookie("utm_source", _GETURL("utm_source"));
+	        cria_cookie("utm_medium", _GETURL("utm_medium"));
+
+		}else{
+
+		    //Se o cookie existir, mas a url não existir, muda o telefone pelo valor do cookie
+		    muda_tel( tel_atual, checa_campanha( readCookie("utm_campaign") ) );
+		        
+	        _CRIAINPUT( "site", readCookie("utm_campaign") );
+	        _CRIAINPUT( "utm_source", readCookie("utm_source") );
+	        _CRIAINPUT( "utm_medium", readCookie("utm_medium") );
+	        _CRIAINPUT( "utm_campaign", readCookie("utm_campaign")  );
+		}
+
+	}else{
+
+		if( _GETURL("utm_campaign") ){
+
+			//Se o cookie não existir, mas a URL existir, muda os telefones e Cria o cookie
+			muda_tel( tel_atual, checa_campanha( _GETURL("utm_campaign") ) );
+		        
+	        _CRIAINPUT( "site", _GETURL("utm_campaign") );
+	        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
+	        _CRIAINPUT( "utm_medium", _GETURL("utm_medium") );
+	        _CRIAINPUT( "utm_campaign", _GETURL("utm_campaign")  );
+
+	        cria_cookie("site", _GETURL("utm_campaign") );
+	        cria_cookie("utm_campaign", _GETURL("utm_campaign"));
+	        cria_cookie("utm_source", _GETURL("utm_source"));
+	        cria_cookie("utm_medium", _GETURL("utm_medium"));
+
+
+
+		}else{
+
+			//se o cookie e a url não existirem, não muda telefone, mas cria os inputs utm_source e medium com valores padrões
+			_CRIAINPUT( "site", campanha_organica);
+	        _CRIAINPUT( "utm_source", 'google' );
+	        _CRIAINPUT( "utm_medium", 'organic' );
+	        _CRIAINPUT( "utm_campaign", campanha_organica  );
+
+	        cria_cookie("site", campanha_organica);
+	        cria_cookie("utm_campaign", campanha_organica);
+	        cria_cookie("utm_source", 'google');
+	        cria_cookie("utm_medium", 'organic');
+
+		}
+
+	}
+}
+
+
 function mascara_telefone(classe_campo){
 	var campo = ".p_inputtelefone";
 	if (classe_campo == null) {
@@ -206,6 +272,9 @@ var valida_form = function(form, event){
 
 	var formulario = form;
 	var campo_telefone = formulario.find('.p_inputtelefone');
+	var tel_length_min = 8;
+	var tel_length_max = 9;
+
 	var campo_ddd = formulario.find('.p_inputddd');
 
 	var input_colors = form.find('input').first().css('background-color');
@@ -215,7 +284,6 @@ var valida_form = function(form, event){
 
 	var ddd = false;
 	var tel = false;
-
 
 	if( typeof campo_ddd !== 'undefined'  ){
 		if(campo_ddd.val().replace(/[^0-9]/g, '').length < 2 || campo_ddd.val().replace(/[^0-9]/g, '').length > 3 ){
@@ -231,10 +299,12 @@ var valida_form = function(form, event){
 		}
 	}else{
 		ddd = true;
+		tel_length_min = 10;
+		tel_length_max = 11;
 	}
 
 	if( typeof campo_telefone !== 'undefined'  ){
-		if(campo_telefone.val().replace(/[^0-9]/g, '').length < 8 || campo_telefone.val().replace(/[^0-9]/g, '').length > 9 ){
+		if(campo_telefone.val().replace(/[^0-9]/g, '').length < tel_length_min || campo_telefone.val().replace(/[^0-9]/g, '').length > tel_length_max ){
 			campo_telefone.css('background','#FF7171');
 			console.log('e');
 			campo_telefone.focus();
