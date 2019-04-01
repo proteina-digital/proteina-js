@@ -1,5 +1,5 @@
-// VERSÃO 2.0
-console.log("VERSÃO JS 2.0");
+// VERSÃO 2.1
+console.log("VERSÃO JS 2.1");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -279,13 +279,14 @@ var valida_form = function(form, event){
 
 	var input_colors = form.find('input').first().css('background-color');
 
-
+	console.log("campo_ddd: "+campo_ddd.val());
+	console.log("campo_telefone: "+campo_telefone.val());
 
 
 	var ddd = false;
 	var tel = false;
 
-	if( typeof campo_ddd !== 'undefined'  ){
+	if( typeof campo_ddd.val() !== 'undefined' ){
 		if(campo_ddd.val().replace(/[^0-9]/g, '').length < 2 || campo_ddd.val().replace(/[^0-9]/g, '').length > 3 ){
 			campo_ddd.css('background','#FF7171');
 			campo_ddd.focus();
@@ -303,7 +304,7 @@ var valida_form = function(form, event){
 		tel_length_max = 11;
 	}
 
-	if( typeof campo_telefone !== 'undefined'  ){
+	if( typeof campo_telefone.val() !== 'undefined'  ){
 		if(campo_telefone.val().replace(/[^0-9]/g, '').length < tel_length_min || campo_telefone.val().replace(/[^0-9]/g, '').length > tel_length_max ){
 			campo_telefone.css('background','#FF7171');
 			console.log('e');
