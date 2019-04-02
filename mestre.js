@@ -1,5 +1,5 @@
-// VERSÃO 2.2
-console.log("VERSÃO JS 2.2");
+// VERSÃO 2.3
+console.log("VERSÃO JS 2.3");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -58,12 +58,22 @@ function _CRIAINPUT(nome, propriedade){
 }
 
 
-function formatNumber(num) {
-	var a = num.toString().substring(0, 4);
-	var b = num.toString().substring(4, 7);
-	var c = num.toString().substring(7, 11);
+function fixa_elemento(elemento){
+  	var posicao_inicial_elemento = $(elemento).offset().top;
+  	var posicao_atual = 0;
 
-	return a+" "+b+" "+c;
+  	$(window).scroll(function() {
+
+  		var posicao_atual_tela = $(window).scrollTop();
+  	
+  		if (posicao_atual_tela <= posicao_inicial_elemento) {
+		  posicao_atual = parseInt(posicao_inicial_elemento - posicao_atual_tela);
+		}else{
+			posicao_atual = 0;
+		}
+
+		$(elemento).css('top', posicao_atual+"px");
+  	});
 }
 
 //FUNÇÃO PARA MUDAR OS TELEFONES DE ACORDO COM A CAMPANHA
