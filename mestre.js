@@ -1,5 +1,5 @@
-// VERSÃO 2.1
-console.log("VERSÃO JS 2.1");
+// VERSÃO 2.2
+console.log("VERSÃO JS 2.2");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -67,13 +67,21 @@ function formatNumber(num) {
 }
 
 //FUNÇÃO PARA MUDAR OS TELEFONES DE ACORDO COM A CAMPANHA
-var muda_tel = function(tel_atual, tel_novo){
+var muda_tel = function(tel_atual, tel_novo, ddd, formato){
 	var tel_novo_clean = tel_novo.replace(/[^0-9]/g, '');
 	var tel_atual_clean = tel_atual.replace(/[^0-9]/g, '');
 
+	if (ddd) {
+		if (tel_novo_clean.length < 10) {
+			tel_novo_clean = ddd+tel_novo_clean;
+		}
+	}
+
 	// Formatado = XXXX XXX XXXX
-	var tel_atual_formatado = formatNumber(tel_atual_clean);
-	var tel_novo_formatado = formatNumber(tel_novo_clean);
+	var formatter = new StringMask(formato);
+	var tel_atual_formatado = formatter.apply(tel_atual_clean);
+	var tel_novo_formatado = formatter.apply(tel_novo_clean);
+
 
 	console.log(tel_novo_clean);
 	console.log(tel_atual_clean);
@@ -93,7 +101,7 @@ var muda_tel = function(tel_atual, tel_novo){
 };
 
 
-function acao_pelo_tel(tel_atual){
+function acao_pelo_tel(tel_atual, ddd, formato){
 	if ( readCookie('telefone') ){ //se o cokie existir
 
 		if( _GETURL("telefone") ){ //se o telefone existe na url
@@ -101,7 +109,7 @@ function acao_pelo_tel(tel_atual){
 
 		    if ( readCookie('telefone') == _GETURL("telefone") ){ // verifica se o cookie é igual ao telefone da URL
 		        //Se o cookie existir, a URL também existir e eles forem iguais, muda os telefones.
-		        muda_tel( tel_atual, _GETURL("telefone")  );
+		        muda_tel( tel_atual, _GETURL("telefone"), ddd, formato  );
 		        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
 		        _CRIAINPUT( "utm_medium", _GETURL("utm_medium") );
 		        _CRIAINPUT( "utm_campaign", _GETURL("utm_campaign") );
@@ -109,7 +117,7 @@ function acao_pelo_tel(tel_atual){
 
 		    }else{
 		        //Se o cookie existir, a URL também existir e eles NÃO forem iguais, muda os telefones e atualiza o COOKIE para o mesmo valor da URL.
-		        muda_tel( tel_atual, _GETURL("telefone")  );
+		        muda_tel( tel_atual, _GETURL("telefone"), ddd, formato  );
 		        cria_cookie("telefone", _GETURL("telefone"));
 		        cria_cookie("utm_campaign", _GETURL("utm_campaign"));
 		        cria_cookie("utm_source", _GETURL("utm_source"));
@@ -124,7 +132,7 @@ function acao_pelo_tel(tel_atual){
 		}else{
 
 		    //Se o cookie existir, mas a url não existir, muda o telefone pelo valor do cookie
-		    muda_tel( tel_atual, readCookie("telefone")  );
+		    muda_tel( tel_atual, readCookie("telefone"), ddd, formato  );
 		    _CRIAINPUT( "utm_source", readCookie("utm_source") );
 		    _CRIAINPUT( "utm_medium", readCookie("utm_medium") );
 		    _CRIAINPUT( "utm_campaign", readCookie("utm_campaign") );
@@ -139,7 +147,7 @@ function acao_pelo_tel(tel_atual){
 		if( _GETURL("telefone") ){
 
 			//Se o cookie não existir, mas a URL existir, muda os telefones e Cria o cookie
-			muda_tel( tel_atual, _GETURL("telefone")  );
+			muda_tel( tel_atual, _GETURL("telefone"), ddd, formato  );
 
 			cria_cookie("telefone", _GETURL("telefone"));
 			cria_cookie("utm_campaign", _GETURL("utm_campaign"));
@@ -169,12 +177,12 @@ function acao_pelo_tel(tel_atual){
 }
 
 
-function acao_pela_campanha(tel_atual, campanha_organica){
+function acao_pela_campanha(tel_atual, campanha_organica, ddd, formato){
 	if ( readCookie('utm_campaign') ){
 
 		if( _GETURL("utm_campaign") ){
 
-			muda_tel( tel_atual, checa_campanha( _GETURL("utm_campaign") ) );
+			muda_tel( tel_atual, checa_campanha( _GETURL("utm_campaign") ), ddd, formato );
 		        
 	        _CRIAINPUT( "site", _GETURL("utm_campaign") );
 	        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
@@ -189,7 +197,7 @@ function acao_pela_campanha(tel_atual, campanha_organica){
 		}else{
 
 		    //Se o cookie existir, mas a url não existir, muda o telefone pelo valor do cookie
-		    muda_tel( tel_atual, checa_campanha( readCookie("utm_campaign") ) );
+		    muda_tel( tel_atual, checa_campanha( readCookie("utm_campaign") ), ddd, formato );
 		        
 	        _CRIAINPUT( "site", readCookie("utm_campaign") );
 	        _CRIAINPUT( "utm_source", readCookie("utm_source") );
@@ -202,7 +210,7 @@ function acao_pela_campanha(tel_atual, campanha_organica){
 		if( _GETURL("utm_campaign") ){
 
 			//Se o cookie não existir, mas a URL existir, muda os telefones e Cria o cookie
-			muda_tel( tel_atual, checa_campanha( _GETURL("utm_campaign") ) );
+			muda_tel( tel_atual, checa_campanha( _GETURL("utm_campaign") ), ddd, formato );
 		        
 	        _CRIAINPUT( "site", _GETURL("utm_campaign") );
 	        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
