@@ -1,5 +1,5 @@
-// VERSÃO 2.3
-console.log("VERSÃO JS 2.3");
+// VERSÃO 2.4
+console.log("VERSÃO JS 2.4");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -69,7 +69,7 @@ function fixa_elemento(elemento){
   		if (posicao_atual_tela <= posicao_inicial_elemento) {
 		  posicao_atual = parseInt(posicao_inicial_elemento - posicao_atual_tela);
 		}else{
-			posicao_atual = 0;
+			posicao_atual = posicao_inicial_elemento;
 		}
 
 		$(elemento).css('top', posicao_atual+"px");
