@@ -345,3 +345,10 @@ var valida_form = function(form, event){
 		return false;
 	}
 }
+
+// função para colocar fontes padrao até fontes principais serem baixadas
+function carrega_fontes {
+	if('body').hasClass('not_ready') {
+		$('body').removeClass('not_ready');
+	}
+}
