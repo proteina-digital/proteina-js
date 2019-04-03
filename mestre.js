@@ -1,5 +1,5 @@
-// VERSÃO 2.5
-console.log("VERSÃO JS 2.5");
+// VERSÃO 2.6
+console.log("VERSÃO JS 2.6");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -347,7 +347,7 @@ var valida_form = function(form, event){
 }
 
 // função para colocar fontes padrao até fontes principais serem baixadas
-function carrega_fontes {
+function carrega_fontes() {
 	if('body').hasClass('not_ready') {
 		$('body').removeClass('not_ready');
 	}
