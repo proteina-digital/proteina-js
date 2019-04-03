@@ -37,3 +37,19 @@ TROCA O NÚMERO DE ACORDO COM O PARAMETRÔ (telefone=08001112222) DA URL
 ```
 acao_pelo_tel(_NUMERO_0800_ORGANICO_AQUI_);
 ```
+
+OTIMIZAR FONTES
+
+No head (colocar no custom code para não ser carregado enquanto editando no designer)
+```
+<style>
+  .not_ready * {
+  	font-family: Arial, 'sans-serif' !important;
+  }
+</style>
+```
+
+No Webflow.push
+```
+carrega_fontes();
+```
