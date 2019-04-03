@@ -8,7 +8,7 @@ Adicione os arquivos mask e mestre.min.js no bottom, após o jquery:
 
 ```
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-<script type="text/javascript" src="https://rawcdn.githack.com/proteina-digital/proteina-js/master/mestre.min.js"></script>
+<script type="text/javascript" src="https://rawcdn.githack.com/proteina-digital/proteina-js/e1d6ce088ac83cd0f470c77e1e25a37fad997fed/mestre.min.js"></script>
 ```
 
 ### Prerequisites
