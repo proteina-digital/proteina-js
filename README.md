@@ -51,5 +51,5 @@ No head (colocar no custom code para não ser carregado enquanto editando no des
 
 No Webflow.push
 ```
-carrega_fontes();
+carregar_fontes();
 ```
