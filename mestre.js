@@ -345,3 +345,12 @@ var valida_form = function(form, event){
 		return false;
 	}
 }
+
+// funcao para otimizar carregamento de fontes
+function carregar_fontes() {
+	var body = $('body');
+	if(body.hasClass('not_ready')) {
+		body.removeClass('not_ready');
+	}
+}
+
