@@ -1,5 +1,5 @@
-// VERSÃO 2.8
-console.log("VERSÃO JS 2.8");
+// VERSÃO 2.9
+console.log("VERSÃO JS 2.9");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -117,7 +117,7 @@ function checa_parametros_url(campanha_organica, c2c){
     cria_cookie("utm_source", _GETURL("utm_source") ? _GETURL("utm_source") : readCookie("utm_source") ? readCookie("utm_source") : 'google');
     cria_cookie("utm_medium", _GETURL("utm_medium") ? _GETURL("utm_medium") : readCookie("utm_medium") ? readCookie("utm_medium") : 'organic');
 
-    _CRIAINPUT( "site", readCookie("c2c") );
+    _CRIAINPUT( "c2c", readCookie("c2c") );
     _CRIAINPUT( "site", readCookie("utm_campaign") );
     _CRIAINPUT( "utm_source", readCookie("utm_source") );
     _CRIAINPUT( "utm_medium", readCookie("utm_medium") );
