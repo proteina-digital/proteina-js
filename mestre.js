@@ -1,5 +1,5 @@
-// VERSÃO 2.6
-console.log("VERSÃO JS 2.6");
+// VERSÃO 2.7
+console.log("VERSÃO JS 2.7");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -111,7 +111,7 @@ var muda_tel = function(tel_atual, tel_novo, ddd, formato){
 };
 
 
-function acao_pelo_tel(tel_atual, ddd, formato){
+function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica){
 	if ( readCookie('telefone') ){ //se o cokie existir
 
 		if( _GETURL("telefone") ){ //se o telefone existe na url
@@ -175,10 +175,15 @@ function acao_pelo_tel(tel_atual, ddd, formato){
 
 			//se o cookie e a url não existirem, não muda telefone, mas cria os inputs utm_source e medium com valores padrões
 
-			_CRIAINPUT( "utm_source", 'null' );
-			_CRIAINPUT( "utm_medium", 'null' );
-			_CRIAINPUT( "utm_campaign", 'null' );
-			console.log("E");
+			_CRIAINPUT( "site", campanha_organica);
+	        _CRIAINPUT( "utm_source", 'google' );
+	        _CRIAINPUT( "utm_medium", 'organic' );
+	        _CRIAINPUT( "utm_campaign", campanha_organica  );
+
+	        cria_cookie("site", campanha_organica);
+	        cria_cookie("utm_campaign", campanha_organica);
+	        cria_cookie("utm_source", 'google');
+	        cria_cookie("utm_medium", 'organic');
 
 
 		}
