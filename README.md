@@ -8,6 +8,7 @@ Adicione os arquivos mask e mestre.min.js no bottom, após o jquery:
 
 ```
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script type="text/javascript" src="https://rawcdn.githack.com/proteina-digital/string-mask/094cc3104040c61a78564c6c0e640408b3264bb0/src/string-mask.js"></script>
 <script type="text/javascript" src="https://rawcdn.githack.com/proteina-digital/proteina-js/cba2dbaa3954b350ac50739313a35e1cd8eba8f9/mestre.min.js"></script>
 ```
 
@@ -35,7 +36,7 @@ setTimeout(carregar_script("<script bla bla bla><\/script>"), 1500);
 
 TROCA O NÚMERO DE ACORDO COM O PARAMETRÔ (telefone=08001112222) DA URL
 ```
-acao_pelo_tel(_NUMERO_0800_ORGANICO_AQUI_);
+acao_pelo_tel(tel_atual, ddd, formato, campanha_organica);
 ```
 
 OTIMIZAR FONTES
