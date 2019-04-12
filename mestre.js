@@ -1,5 +1,5 @@
-// VERSÃO 2.7
-console.log("VERSÃO JS 2.7");
+// VERSÃO 2.8
+console.log("VERSÃO JS 2.8");
 function desabilitar(){
 	alert ("Todos os direitos Reservados. A cópia e reprodução não-autorizada está expressamente proibida.")
 	return false
@@ -110,8 +110,24 @@ var muda_tel = function(tel_atual, tel_novo, ddd, formato){
 
 };
 
+function checa_parametros_url(campanha_organica, c2c){
+	cria_cookie("c2c",  _GETURL("c2c") ? _GETURL("c2c") : readCookie("c2c") ? readCookie("c2c") : c2c);
+	cria_cookie("site",  _GETURL("utm_campaign") ? _GETURL("utm_campaign") : readCookie("utm_campaign") ? readCookie("utm_campaign") : campanha_organica);
+    cria_cookie("utm_campaign", _GETURL("utm_campaign") ? _GETURL("utm_campaign") : readCookie("utm_campaign") ? readCookie("utm_campaign") : campanha_organica);
+    cria_cookie("utm_source", _GETURL("utm_source") ? _GETURL("utm_source") : readCookie("utm_source") ? readCookie("utm_source") : 'google');
+    cria_cookie("utm_medium", _GETURL("utm_medium") ? _GETURL("utm_medium") : readCookie("utm_medium") ? readCookie("utm_medium") : 'organic');
 
-function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica){
+    _CRIAINPUT( "site", readCookie("c2c") );
+    _CRIAINPUT( "site", readCookie("utm_campaign") );
+    _CRIAINPUT( "utm_source", readCookie("utm_source") );
+    _CRIAINPUT( "utm_medium", readCookie("utm_medium") );
+    _CRIAINPUT( "utm_campaign", readCookie("utm_campaign") );
+
+    console.log('checa_parametros_url');
+}
+
+
+function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica, c2c){
 	if ( readCookie('telefone') ){ //se o cokie existir
 
 		if( _GETURL("telefone") ){ //se o telefone existe na url
@@ -120,21 +136,17 @@ function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica){
 		    if ( readCookie('telefone') == _GETURL("telefone") ){ // verifica se o cookie é igual ao telefone da URL
 		        //Se o cookie existir, a URL também existir e eles forem iguais, muda os telefones.
 		        muda_tel( tel_atual, _GETURL("telefone"), ddd, formato  );
-		        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
-		        _CRIAINPUT( "utm_medium", _GETURL("utm_medium") );
-		        _CRIAINPUT( "utm_campaign", _GETURL("utm_campaign") );
+
+		        checa_parametros_url(campanha_organica, c2c);
+
 		        console.log("A");
 
 		    }else{
 		        //Se o cookie existir, a URL também existir e eles NÃO forem iguais, muda os telefones e atualiza o COOKIE para o mesmo valor da URL.
 		        muda_tel( tel_atual, _GETURL("telefone"), ddd, formato  );
 		        cria_cookie("telefone", _GETURL("telefone"));
-		        cria_cookie("utm_campaign", _GETURL("utm_campaign"));
-		        cria_cookie("utm_source", _GETURL("utm_source"));
-		        cria_cookie("utm_medium", _GETURL("utm_medium"));
-		        _CRIAINPUT( "utm_source", _GETURL("utm_source") );
-		        _CRIAINPUT( "utm_medium", _GETURL("utm_medium") );
-		        _CRIAINPUT( "utm_campaign", _GETURL("utm_campaign") );
+
+		        checa_parametros_url(campanha_organica, c2c);
 		        console.log("B");
 
 		    }
@@ -143,9 +155,9 @@ function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica){
 
 		    //Se o cookie existir, mas a url não existir, muda o telefone pelo valor do cookie
 		    muda_tel( tel_atual, readCookie("telefone"), ddd, formato  );
-		    _CRIAINPUT( "utm_source", readCookie("utm_source") );
-		    _CRIAINPUT( "utm_medium", readCookie("utm_medium") );
-		    _CRIAINPUT( "utm_campaign", readCookie("utm_campaign") );
+		    
+		    checa_parametros_url(campanha_organica, c2c);
+
 		    console.log("C");
 
 		}
@@ -160,14 +172,9 @@ function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica){
 			muda_tel( tel_atual, _GETURL("telefone"), ddd, formato  );
 
 			cria_cookie("telefone", _GETURL("telefone"));
-			cria_cookie("utm_campaign", _GETURL("utm_campaign"));
-			cria_cookie("utm_source", _GETURL("utm_source"));
-			cria_cookie("utm_medium", _GETURL("utm_medium"));
 
 
-			_CRIAINPUT( "utm_source", _GETURL("utm_source") );
-			_CRIAINPUT( "utm_medium", _GETURL("utm_medium") );
-			_CRIAINPUT( "utm_campaign", _GETURL("utm_campaign") );
+			checa_parametros_url(campanha_organica, c2c);
 			console.log("D");
 
 
@@ -175,15 +182,7 @@ function acao_pelo_tel(tel_atual, ddd, formato, campanha_organica){
 
 			//se o cookie e a url não existirem, não muda telefone, mas cria os inputs utm_source e medium com valores padrões
 
-			_CRIAINPUT( "site", campanha_organica);
-	        _CRIAINPUT( "utm_source", 'google' );
-	        _CRIAINPUT( "utm_medium", 'organic' );
-	        _CRIAINPUT( "utm_campaign", campanha_organica  );
-
-	        cria_cookie("site", campanha_organica);
-	        cria_cookie("utm_campaign", campanha_organica);
-	        cria_cookie("utm_source", 'google');
-	        cria_cookie("utm_medium", 'organic');
+			checa_parametros_url(campanha_organica, c2c);
 
 
 		}
@@ -358,4 +357,3 @@ function carregar_fontes() {
 		body.removeClass('not_ready');
 	}
 }
-
